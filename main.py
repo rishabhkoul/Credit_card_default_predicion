@@ -1,25 +1,18 @@
-import pymongo
+from src.logger import logging
+from src.exception import SrcException
+import sys,os
+from src.utility import get_collections_as_dataframe
+from src.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig
+from src.components.data_ingestion import DataIngestion
 
-# Provide the mongodb localhost url to connect python to mongodb.
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+if __name__ == "__main__":
+     try:
+          training_pipeline_config = TrainingPipelineConfig()
+          data_ingestion_config = DataIngestionConfig(training_pipeline_config)
+          print(data_ingestion_config.to_dict())
+          data_ingestion = DataIngestion(data_ingestion_config)
+          print(data_ingestion.initiate_data_ingesion())
 
-# Database Name
-dataBase = client["neurolabDB"]
 
-# Collection  Name
-collection = dataBase['Products']
-
-# Sample data
-d = {'companyName': 'iNeuron',
-     'product': 'Affordable AI',
-     'courseOffered': 'Machine Learning with Deployment'}
-
-# Insert above records in the collection
-rec = collection.insert_one(d)
-
-# Lets Verify all the record at once present in the record with all the fields
-all_record = collection.find()
-
-# Printing all records present in the collection
-for idx, record in enumerate(all_record):
-     print(f"{idx}: {record}")
+     except Exception as e:
+          raise SrcException(e,sys)
