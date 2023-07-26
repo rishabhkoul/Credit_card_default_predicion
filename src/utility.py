@@ -3,6 +3,8 @@ from src.config import mongo_client
 from src.logger import logging
 from src.exception import SrcException
 import os, sys
+import yaml
+import dill
 
 
 def get_collections_as_dataframe(database_name,collection_name):
@@ -17,3 +19,13 @@ def get_collections_as_dataframe(database_name,collection_name):
         return df
     except Exception as e:
         raise SrcException(e,sys)
+
+def write_yaml_file(file_path,data:dict):
+    try:
+        file_dir = os.path.dirname(file_path)
+        os.makedirs(file_dir,exist_ok = True)
+
+        with open(file_path,'w') as file_writer:
+            yaml.dump(data,file_writer)
+    except Exception as e:
+        raise SrcException(e, sys)
