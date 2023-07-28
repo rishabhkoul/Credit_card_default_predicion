@@ -50,6 +50,13 @@ class DataTransformation:
             input_features_test_arr,target_feature_test = smt.fit_resample(input_features_test_arr,target_feature_test)
             logging.info(f"After resampling in training set input:{input_features_test_arr} target: {target_feature_test}")
 
+            train_arr = np.c_(input_features_train_arr,target_feature_train)
+            test_arr = np.c(input_features_test_arr,target_feature_test)
+
+            utility.save_numpy_array_data(self.data_transformation_config.transformed_train_path, train_arr)
+            utility.save_numpy_array_data(self.transformed_test_path, test_arr)
+
+
             data_transformation_artifact = artifact_entity.DataTranformationArtifact(
                 transformed_train_path = self.data_transformation_config.transformed_train_path,
                 transformed_test_path = self.data.data_transformation_config.transformed_test_path
