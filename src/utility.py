@@ -5,6 +5,7 @@ from src.exception import SrcException
 import os, sys
 import yaml
 import dill
+import numpy as np 
 
 
 def get_collections_as_dataframe(database_name,collection_name):

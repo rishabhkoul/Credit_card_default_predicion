@@ -2,7 +2,7 @@ from src.logger import logging
 from src.exception import SrcException
 from src.entity import config_entity,artifact_entity
 import os,sys
-from sklearn.ensemble import AdaBoostClasifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import f1_score
 from src import utility
 
@@ -16,9 +16,9 @@ class ModelTrainer:
         except Exception as e:
             raise SrcException(e,sys)
 
-    def train_model(x,y):
+    def train_model(self,x,y):
         try:
-            ada = AdaBoostClasifier()
+            ada = AdaBoostClassifier()
             ada.fit(x,y)
             return ada
         except Exception as e:
@@ -32,17 +32,17 @@ class ModelTrainer:
 
             logging.info("Splitting the data into input features and target feature from both train and test arrays")
             x_train,y_train = train_arr[:,:-1],train_arr[:,-1]
-            X_test,y_test = test_arr[:,:-1],test_arr[:,-1]
+            x_test,y_test = test_arr[:,:-1],test_arr[:,-1]
 
             logging.info("Training the model")
-            model = train_model(x_train,y_train)
+            model = self.train_model(x_train,y_train)
 
             logging.info("Calculating the F1 score for train data")
             y_hat_train = model.predict(x_train)
             f1_train_score = f1_score(y_true=y_train,y_pred=y_hat_train)
 
             logging.info("calculating the F1 score for test data")
-            y_hat_test = mmodel.predict(x_test)
+            y_hat_test = model.predict(x_test)
             f1_test_score = f1_score(y_true=y_test,y_pred=y_hat_test)
 
             logging.info(f"Train Score: {f1_train_score} and test score {f1_test_score}")

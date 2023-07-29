@@ -73,7 +73,7 @@ class DataValidation:
 
             # preparing validation artifact
             data_validation_artifact = artifact_entity.DataValidationArtifact(self.data_validation_config.report_file_path)
-            loggung.info(f"Data Validation artifact: {data_validation_artifact}")
+            logging.info(f"Data Validation artifact: {data_validation_artifact}")
             return data_validation_artifact
 
         except Exception as e:

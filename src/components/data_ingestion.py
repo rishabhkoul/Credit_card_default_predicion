@@ -14,7 +14,7 @@ class DataIngestion:
         except Exception as e:
             raise SrcException(e,sys)
 
-    def initiate_data_ingesion(self)->artifact_entity.DataIngestionArtifact:
+    def initiate_data_ingestion(self)->artifact_entity.DataIngestionArtifact:
         try:
             logging.info(f"Exporting collection data from mongoDB as pandas Dataframe")
             df = get_collections_as_dataframe(self.data_ingestion_config.database_name, self.data_ingestion_config.collection_name)
@@ -47,7 +47,7 @@ class DataIngestion:
 
             data_ingestion_artifact = artifact_entity.DataIngestionArtifact(train_file_path=self.data_ingestion_config.train_file_path, test_file_path= self.data_ingestion_config.test_file_path, feature_store_file_path = self.data_ingestion_config.feature_store_file_path)
             logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
-
+            return data_ingestion_artifact
 
         except Exception as e:
             raise SrcException(e,sys)

@@ -1,18 +1,12 @@
-from src.logger import logging
-from src.exception import SrcException
-import sys,os
-from src.utility import get_collections_as_dataframe
-from src.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig
-from src.components.data_ingestion import DataIngestion
+from src.pipeline.training_pipeline import start_training_pipeline
+from src.pipeline.batch_prediction import start_batch_prediction
 
-if __name__ == "__main__":
+file_path = "/config/workspace/UCI_Credit_Card.csv"
+
+if __name__ == '__main__':
      try:
-          training_pipeline_config = TrainingPipelineConfig()
-          data_ingestion_config = DataIngestionConfig(training_pipeline_config)
-          print(data_ingestion_config.to_dict())
-          data_ingestion = DataIngestion(data_ingestion_config)
-          print(data_ingestion.initiate_data_ingesion())
-
-
+          start_training_pipeline()
+          output_file = start_batch_prediction(input_file_path=file_path)
+          print(output_file)
      except Exception as e:
-          raise SrcException(e,sys)
+          print(e)

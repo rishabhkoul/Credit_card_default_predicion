@@ -21,7 +21,7 @@ class ModelEvaluation:
         except Exception as e:
             raise SrcException(e,sys)
     
-    def initiate_model_evaluation():
+    def initiate_model_evaluation(self):
         try:
             # if saved model folder has a model we will compare it to newer model
             # and check which model is best trained
@@ -33,7 +33,7 @@ class ModelEvaluation:
             
             # Finding the location of model
             logging.info("Finding the location of model")
-            model_path = get_latest_model_path()
+            model_path = self.model_resolver.get_latest_model_path()
 
             logging.info("Previous trained objects of model")
             model = utility.load_object(file_path=model_path)

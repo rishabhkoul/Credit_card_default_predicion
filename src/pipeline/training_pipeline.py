@@ -20,7 +20,7 @@ def start_training_pipeline():
         logging.info(data_ingestion_congfig.to_dict())
 
         data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_congfig)
-        data_ingestion_artifact = data_ingestion.initiate_data_ingesion()
+        data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
 
         #Data validation
         data_validation_config = config_entity.DataValidationConfig(training_pipeline_config=training_pipeline_config)

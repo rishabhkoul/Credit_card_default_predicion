@@ -20,7 +20,7 @@ class ModelResolver:
         except Exception as e:
             raise e
     
-    def get_latest_model_path():
+    def get_latest_model_path(self):
         try:
             latest_dir = self.get_latest_dir_path()
             if latest_dir == None:

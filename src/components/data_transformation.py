@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np 
 import os,sys 
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import labelEncoder
+from sklearn.preprocessing import LabelEncoder
 from imblearn.combine import SMOTETomek
 from sklearn.preprocessing import RobustScaler
 from src.config import TARGET_COLUMN
@@ -50,16 +50,16 @@ class DataTransformation:
             input_features_test_arr,target_feature_test = smt.fit_resample(input_features_test_arr,target_feature_test)
             logging.info(f"After resampling in training set input:{input_features_test_arr} target: {target_feature_test}")
 
-            train_arr = np.c_(input_features_train_arr,target_feature_train)
-            test_arr = np.c(input_features_test_arr,target_feature_test)
+            train_arr = np.c_[input_features_train_arr,target_feature_train]
+            test_arr = np.c_[input_features_test_arr,target_feature_test]
 
             utility.save_numpy_array_data(self.data_transformation_config.transformed_train_path, train_arr)
-            utility.save_numpy_array_data(self.transformed_test_path, test_arr)
+            utility.save_numpy_array_data(self.data_transformation_config.transformed_test_path, test_arr)
 
 
             data_transformation_artifact = artifact_entity.DataTranformationArtifact(
                 transformed_train_path = self.data_transformation_config.transformed_train_path,
-                transformed_test_path = self.data.data_transformation_config.transformed_test_path
+                transformed_test_path = self.data_transformation_config.transformed_test_path
             )
             logging.info(f"Data transformation object {data_transformation_artifact}")
             return data_transformation_artifact
