@@ -26,10 +26,11 @@ class ModelEvaluation:
             # if saved model folder has a model we will compare it to newer model
             # and check which model is best trained
             logging.info("If saved model folder has a model, then we will compare which model is best trained")
-            latest_dir_path = self.model_resolver.get_latest_dir_path
+            latest_dir_path = self.model_resolver.get_latest_dir_path()
             if latest_dir_path == None:
                 model_eval_artifact_entity = artifact_entity.ModelEvaluationArtifact(is_model_accepted=True, improved_accuracy=None)
                 logging.info(f"Model evalutation artifact: {model_eval_artifact_entity}")
+                return model_eval_artifact_entity
             
             # Finding the location of model
             logging.info("Finding the location of model")
@@ -59,7 +60,7 @@ class ModelEvaluation:
             current_model_score = f1_score(y_true,y_pred)
             logging.info(f"Accuracy using current trained model : {current_model_score}")
 
-            if current_model_score <= previous_model_score:
+            if current_model_score < previous_model_score:
                 logging.info(f'current trained model is not better han pevious model')
                 raise Exception(f'current trained model is not better han pevious model')
 

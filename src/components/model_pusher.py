@@ -3,6 +3,7 @@ from src.logger import logging
 from src.entity import config_entity,artifact_entity
 from src import utility
 from src.predictor import ModelResolver
+import os,sys
 
 
 class ModelPusher:

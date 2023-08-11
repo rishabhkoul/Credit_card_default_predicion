@@ -23,15 +23,15 @@ class ModelResolver:
     def get_latest_model_path(self):
         try:
             latest_dir = self.get_latest_dir_path()
-            if latest_dir == None:
-                return Exception(f"Model not available")
+            if latest_dir is None:
+                raise Exception(f"Model not available")
             return os.path.join(latest_dir,self.model_dir_name,MODEL_FILE_NAME)
         except Exception as e:
             raise e
 
     def get_latest_save_dir_path(self):
         try:
-            latest_dir = get_latest_dir_path()
+            latest_dir = self.get_latest_dir_path()
             if latest_dir == None:
                 return os.path.join(self.model_registry,f"{0}")
             latest_dir_num = int(os.path.basename(self.get_latest_dir_path()))
@@ -41,7 +41,7 @@ class ModelResolver:
     
     def get_latest_save_model_path(self):
         try:
-            latest_dir = get_latest_save_dir_path()
+            latest_dir = self.get_latest_save_dir_path()
             return os.path.join(latest_dir,self.model_dir_name,MODEL_FILE_NAME)
         except Exception as e:
             raise e
