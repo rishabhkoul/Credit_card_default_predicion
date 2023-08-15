@@ -3,7 +3,6 @@ import pymongo
 from dataclasses import dataclass
 import os
 
-
 @dataclass
 class EnvironmentVariable:
     mongo_db_url = os.getenv("MONGO_DB_URL")

@@ -1,9 +1,8 @@
 import pymongo
 import pandas as pd
 import json
+from src.config import mongo_client
 
-
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
 DATABASE_NAME = "credit_card_data"
 COLLECTION_NAME = "credit_default"
@@ -21,6 +20,6 @@ if __name__== "__main__":
     print(json_records[0])
 
     # insert the json formatted data to mongoDB
-    client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_records)
+    mongo_client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_records)
 
 
