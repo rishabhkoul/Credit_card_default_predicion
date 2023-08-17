@@ -1,7 +1,8 @@
 artifact
 logs
 notebook
-prediction'saved_models
+prediction
+saved_models
 .env
 *.egg-info
 data_dump_pymongo.py 
