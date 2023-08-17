@@ -8,10 +8,10 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'sensor_training',
+    'credit_training',
     default_args={'retries': 2},
     # [END default_args]
-    description='Sensor Fault Detection',
+    description='Credit default prediction',
     schedule_interval="@weekly",
     start_date=pendulum.datetime(2022, 12, 11, tz="UTC"),
     catchup=False,
@@ -20,7 +20,7 @@ with DAG(
 
     
     def training(**kwargs):
-        from sensor.pipeline.training_pipeline import start_training_pipeline
+        from src.pipeline.training_pipeline import start_training_pipeline
         start_training_pipeline()
     
     def sync_artifact_to_s3_bucket(**kwargs):
